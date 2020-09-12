@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class StageGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject boardBlock;
-    [SerializeField] private GameObject boardWhiteBlock;
-    [SerializeField] private Transform parentBoard;
+    [SerializeField] private GameObject boardBlock = null;
+    [SerializeField] private GameObject boardWhiteBlock = null;
+    [SerializeField] private Transform parentBoard = null;
 
-    // Start is called before the first frame update
     void Awake()
     {
         BoardGenerator();

@@ -13,18 +13,34 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = new PlayerInput();
         playerPutStone = GetComponent<PlayerPutStone>();
+        GameManeger.Instance.turnTexts.ChangeTurnText(playerID);
+        GameManeger.Instance.stoneCount.CountStones();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.IsPut() && playerID == 1)
+        if (GameManeger.Instance.currentState == GameManeger.GAME_STATE.Playing)
         {
-            if(playerPutStone.PutStone(playerID))playerID = 2;
-        }
-        else if (playerInput.IsPut() && playerID == 2)
-        {
-            if (playerPutStone.PutStone(playerID)) playerID = 1;
+            if (playerInput.IsPut() && playerID == 1)
+            {
+                if (playerPutStone.PutStone(playerID))
+                {
+                    playerID = 2;
+                    GameManeger.Instance.turnTexts.ChangeTurnText(playerID);
+                    GameManeger.Instance.stoneCount.CountStones();
+                }
+            }
+            else if (playerInput.IsPut() && playerID == 2)
+            {
+                if (playerPutStone.PutStone(playerID))
+                {
+                    playerID = 1;
+                    GameManeger.Instance.turnTexts.ChangeTurnText(playerID);
+                    GameManeger.Instance.stoneCount.CountStones();
+
+                }
+            }
         }
     }
 }

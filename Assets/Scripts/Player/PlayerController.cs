@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerPutStone playerPutStone;
+    [SerializeField] private int playerID = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +18,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.IsPut())
+        if (playerInput.IsPut() && playerID == 1)
         {
-            playerPutStone.PutStone();
+            if(playerPutStone.PutStone(playerID))playerID = 2;
+        }
+        else if (playerInput.IsPut() && playerID == 2)
+        {
+            if (playerPutStone.PutStone(playerID)) playerID = 1;
         }
     }
 }
